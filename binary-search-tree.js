@@ -55,7 +55,7 @@ class BinarySearchTree {
 
   preOrderTraversal(currentNode = this.root) {
     // Your code here
-    if (currentNode === null) return;
+    //if (currentNode === null) return;
     console.log(currentNode.val);
     
     if (currentNode.left) {
@@ -73,12 +73,12 @@ class BinarySearchTree {
     if (currentNode === null) return;
     
     if (currentNode.left) {
-      this.preOrderTraversal(currentNode.left)
+      this.inOrderTraversal(currentNode.left)      
     }  
     console.log(currentNode.val);
  
     if (currentNode.right) {
-      this.preOrderTraversal(currentNode.right)
+      this.inOrderTraversal(currentNode.right)
             
     }
     return
@@ -91,10 +91,10 @@ class BinarySearchTree {
     if (currentNode === null) return;
         
     if (currentNode.left) {
-      this.preOrderTraversal(currentNode.left)
+      this.postOrderTraversal(currentNode.left)
     }  
     if (currentNode.right) {
-      this.preOrderTraversal(currentNode.right)
+      this.postOrderTraversal(currentNode.right)
     }
     console.log(currentNode.val);
 
@@ -104,35 +104,41 @@ class BinarySearchTree {
     // Breadth First Traversal - Iterative
   breadthFirstTraversal() {
     // your code here
+    // doing with queue (FILO) through array
+    let queue = [];
+    
+    // adding head
+    queue.push(this.root);
+
+    // go while queue
+    while(queue.length > 0) {
+      // for every node in queue need to print it, extract and add 0-1-2 childrens to the end;
+      let currentNode = queue.shift()
+      console.log(currentNode.val);
+      if (currentNode.left) queue.push(currentNode.left)
+      if (currentNode.right) queue.push(currentNode.right);
+    }
+
   }
 
   // Depth First Traversal - Iterative
   depthFirstTraversal() {
     // your code here
+    // can use FIFO (stack) with array
+    let stack = [];
+    
+    // adding head
+    stack.push(this.root);
+
+    // go while stack
+    while(stack.length > 0) {
+      // for every node in stack need to print it, extract, and add 0-1-2 childrens to the end;
+      let currentNode = stack.pop()
+      console.log(currentNode.val);
+      if (currentNode.left) stack.push(currentNode.left)
+      if (currentNode.right) stack.push(currentNode.right);
+    }
   }
 }
-
-let bst;
-bst = new BinarySearchTree();
-
-bst.insert(4);
-bst.insert(2);
-
-console.log(bst.root.val) //).to.equal(4);
-console.log(bst.root.right) //.to.equal(null);
-
-let leftNode = bst.root.left;
-console.log('bst.root.left', bst.root.left);
-console.log('leftNode.val', leftNode.val) //.to.equal(2);
-//expect(leftNode.left).to.equal(null);
-//expect(leftNode.right).to.equal(null);
-
-
-
-
-
-
-
-
 
 module.exports = { BinarySearchTree, TreeNode };
